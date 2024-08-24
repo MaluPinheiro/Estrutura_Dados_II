@@ -35,8 +35,8 @@ int altura_ArvBin(ArvBin* raiz){
     return 0;
   }
   
-  int alt_esq = altura_Arv(&((*raiz)->esq));
-  int alt_dir = altura_Arv(&((*raiz)->dir));
+  int alt_esq = altura_ArvBin(&((*raiz)->esq));
+  int alt_dir = altura_ArvBin(&((*raiz)->dir));
 
   if(alt_esq > alt_dir){
     return (alt_esq + 1);
@@ -179,15 +179,15 @@ int main(void) {
   }
 
   int altura = altura_ArvBin(raiz);
-  printf("\nAltura: %d ",altura);
+  printf("\nAltura: %d \n",altura);
+
+  excluir(raiz, 30);
 
   printf("Insira o valor que deseja procurar: "); scanf("%d", &valor);
   if(pesquisar(raiz, valor))
     printf("Valor %d encontrado na arvore\n", valor);
   else
     printf("Valor %d não encontrado na arvore\n", valor);
-
-  excluir(raiz, 30);
 
   return 0;
 }
