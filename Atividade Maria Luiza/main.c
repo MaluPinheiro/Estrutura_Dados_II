@@ -19,7 +19,7 @@ struct NO {
 
 typedef struct NO *ArvBin;
 
-ArvBin *criaArvBin() {
+ArvBin *cria_ArvBin() {
   ArvBin *raiz = (ArvBin*)malloc(sizeof(ArvBin));
   if(raiz != NULL) {
     *raiz = NULL;
@@ -27,7 +27,7 @@ ArvBin *criaArvBin() {
   return raiz;
 }
 
-int altura_Arv(ArvBin* raiz){
+int altura_ArvBin(ArvBin* raiz){
   if(raiz == NULL){
     return -1;
   }
@@ -85,6 +85,23 @@ int inserir(ArvBin *raiz, int valor) {
     }
   }
   return 1; 
+}
+
+int pesquisar(ArvBin *raiz, int valor){
+  if(*raiz == NULL){
+    return 0;
+  }
+  struct NO *atual = *raiz;
+  while(atual != NULL){
+    if(valor == atual->info){
+      return 1;
+    }else if(valor > atual->info){
+      atual = atual->dir;
+    }else{
+      atual = atual->esq;
+    }
+  }
+  return 0;
 }
 
 int excluir(ArvBin *raiz, int valor){
@@ -154,6 +171,23 @@ int excluir(ArvBin *raiz, int valor){
 }
 
 int main(void) {
-  printf("Hello World\n");
+  ArvBin* raiz = cria_ArvBin();
+  int valor;
+  int N = 8,dados[8] = {50,100,30,20,40,45,35,37};
+  for(int i=0;i<N;i++){
+    inserir(raiz, dados[i]);
+  }
+
+  int altura = altura_ArvBin(raiz);
+  printf("\nAltura: %d ",altura);
+
+  printf("Insira o valor que deseja procurar: "); scanf("%d", &valor);
+  if(pesquisar(raiz, valor))
+    printf("Valor %d encontrado na arvore\n", valor);
+  else
+    printf("Valor %d não encontrado na arvore\n", valor);
+
+  excluir(raiz, 30);
+
   return 0;
 }
